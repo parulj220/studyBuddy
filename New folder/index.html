@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Buddy AI</title>
+  <style>
+    /* Night Sky and Stars Theme */
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, #0D1B2A, #1B263B);
+      /* Deep Navy Blue Gradient */
+      color: #E4E5E9;
+      /* Soft White for Text */
+    }
+
+    header {
+      background-color: #3E5C76;
+      /* Moonlit Glow */
+      color: #E4E5E9;
+      /* Soft White */
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 1.5rem 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #E4E5E9;
+      /* Soft White */
+      text-decoration: none;
+      font-size: 1.2rem;
+      margin: 0 1rem;
+      transition: color 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: #A7C5EB;
+      /* Lavender Glow */
+      transform: translateY(-2px);
+    }
+
+    .container {
+      display: none;
+      /* Hidden by default */
+      background-color: #1B263B;
+      /* Slightly Lighter Navy Blue */
+      border-radius: 15px;
+      padding: 30px;
+      width: 90%;
+      max-width: 700px;
+      margin: 20px auto;
+      text-align: center;
+      color: #E4E5E9;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .container.active {
+      display: block;
+      /* Show active section */
+    }
+
+    .home-section {
+      display: block;
+      background-color: #1B263B;
+      /* Slightly Lighter Navy Blue */
+      border-radius: 15px;
+      padding: 30px;
+      width: 90%;
+      max-width: 700px;
+      margin: 20px auto;
+      text-align: center;
+      color: #E4E5E9;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    textarea {
+      width: 90%;
+      height: 150px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 2px solid #A7C5EB;
+      /* Lavender Glow */
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #0D1B2A;
+      /* Night Sky */
+      color: #E4E5E9;
+      box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+    }
+
+    input {
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 90%;
+      padding: 12px;
+      background-color: #3E5C76;
+      /* Moonlit Glow */
+      color: #E4E5E9;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-bottom: 20px;
+      /* Added space below the button */
+    }
+
+    button:hover {
+      background-color: #A7C5EB;
+      /* Lavender Glow */
+      transform: translateY(-3px);
+    }
+
+    select {
+      width: 90%;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 2px solid #A7C5EB;
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #0D1B2A;
+      color: #E4E5E9;
+    }
+
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      padding: 10px;
+      background-color: #0D1B2A;
+      /* Deep Navy Blue */
+      color: #E4E5E9;
+      font-size: 1rem;
+    }
+  </style>
+  <script>
+   // Function to play sound when home page is loaded (requires user interaction)
+window.onload = function () {
+  document.body.addEventListener('click', function () {
+    const audio = new Audio('student-ai.mp3'); // Path to the audio file
+    audio.play().catch(error => {
+      console.error("Failed to play audio:", error);
+    });
+  }, { once: true }); // Ensures this runs only once
+};
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.container, .home-section');
+      sections.forEach(section => section.style.display = "none");
+
+      const activeSection = document.getElementById(sectionId);
+      if (activeSection) activeSection.style.display = "block";
+    }
+
+    // Placeholder function for "Add to Notes" buttons
+    function addToNotes() {
+      // Get the output text area (assuming it has an ID like 'output-text')
+      const outputText = document.querySelector('#ask-me-section textarea[readonly]').value;
+
+      // Get the 'Generate Notes' text area (assuming it has an ID like 'notes-input')
+      const notesTextArea = document.querySelector('#generate-notes-section textarea');
+
+      // Check if text exists in the output text area
+      if (outputText.trim() === "") {
+        alert("There's no text to add to notes!");
+        return;
+      }
+
+      // Append the text to the Generate Notes text area
+      notesTextArea.value += (notesTextArea.value ? "\n" : "") + outputText;
+
+      // Show a success message
+      alert("Text added to the 'Generate Notes' section!");
+
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>Study Buddy AI</h1>
+    <nav>
+      <a onclick="showSection('home-section')">Home</a>
+      <a onclick="showSection('ask-me-section')">Ask Me</a>
+      <a onclick="showSection('translator-section')">Translate</a>
+      <a onclick="showSection('summarizer-section')">Summarize</a>
+      <a onclick="showSection('generate-notes-section')">Generate Notes</a> <!-- Added navigation for new section -->
+    </nav>
+  </header>
+
+  <!-- Updated Home Section with Compatibility -->
+  <div id="home-section" class="home-section">
+    <h1 style="font-size: 2.5rem; color: #A7C5EB; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);">
+      Welcome to Study Buddy AI
+    </h1>
+    <p style="font-size: 1.2rem; color: #E4E5E9; margin-bottom: 20px;">
+      Your trusted partner for learning, translating, summarizing, and note-taking!
+    </p>
+    <!-- Decorative Image -->
+    <img src="" alt="Study Buddy AI Banner"
+      style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); margin-bottom: 20px; max-width: 100%; height: auto;">
+    <!-- Call to Action -->
+    <p style="font-size: 1rem; color: #A7C5EB;">
+      Use the menu above to explore our features and boost your productivity!
+    </p>
+  </div>
+
+  <!-- Ask Me Section -->
+  <div id="ask-me-section" class="container">
+    <h2>Ask Me Anything</h2>
+    <textarea placeholder="Enter text to get an answer..."></textarea>
+    <button>Ask Me</button>
+    <textarea readonly placeholder="Your AI-generated answer will appear here."></textarea>
+    <button onclick="addToNotes()">Add to Notes</button> <!-- Added button -->
+  </div>
+
+  <!-- Translator Section -->
+  <div id="translator-section" class="container">
+    <h2>AI-Powered Translator</h2>
+    <textarea placeholder="Enter text to translate..."></textarea>
+    <label for="languageSelect">Choose Language:</label> <!-- Added label -->
+    <select id="languageSelect">
+      <option value="en">English</option>
+      <option value="es">Spanish</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="zh">Chinese</option>
+      <option value="hi">Hindi</option>
+      <option value="ta">Tamil</option>
+      <option value="te">Telugu</option>
+      <option value="k">Kanada</option>
+    </select>
+    <button>Translate</button>
+    <textarea readonly placeholder="Your translated text will appear here."></textarea>
+    <button onclick="addToNotes()">Add to Notes</button> <!-- Added button -->
+  </div>
+
+  <!-- Summarizer Section -->
+  <div id="summarizer-section" class="container">
+    <h2>Summarizer for Large Text</h2>
+    <textarea placeholder="Enter large text to summarize..."></textarea>
+    <button>Summarize</button>
+    <textarea readonly placeholder="Your summary will appear here."></textarea>
+    <button onclick="addToNotes()">Add to Notes</button> <!-- Added button -->
+  </div>
+
+  <!-- Generate Notes Section -->
+  <div id="generate-notes-section" class="container">
+    <h2>Generate Notes</h2>
+    <textarea placeholder="Type your notes here..."></textarea>
+    <h3>Upload Image</h3>
+    <input type="file" accept="image/*" id="upload-image" />
+    <button id="extract-text-image">Extract Text From Image</button>
+    <button id="download-pdf">Download As PDF</button>
+  </div>
+
+  <footer>
+    Crafted for student success and innovation.
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Homepage</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(120deg, #f6d365, #fda085);
+      color: #333;
+    }
+    header {
+      background-color: #333;
+      color: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 1rem 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      margin: 0 1rem;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #f6d365;
+    }
+    main {
+      text-align: center;
+      padding: 2rem;
+    }
+    main h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      margin: 1rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #f6d365;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Interactive Homepage</h1>
+    <nav>
+      <a href="#summarize">Summarize</a>
+      <a href="#translate">Translate</a>
+      <a href="#ask-me">Ask Me</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Welcome to the Interactive Homepage</h2>
+    <p>Select one of the options below to get started!</p>
+    <button id="summarize-btn">Summarize</button>
+    <button id="translate-btn">Translate</button>
+    <button id="ask-me-btn">Ask Me</button>
+  </main>
+</body>
+</html>
